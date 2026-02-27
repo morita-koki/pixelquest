@@ -7,8 +7,8 @@ import { ResultScene } from './scenes/ResultScene.js';
 
 const config = {
   type: Phaser.AUTO,
-  width: 480,
-  height: 800,
+  width: 800,
+  height: 480,
   backgroundColor: '#0a0a0c',
   parent: 'game',
   scale: {

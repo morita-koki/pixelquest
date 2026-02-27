@@ -21,32 +21,35 @@ export class EditScene extends Phaser.Scene {
   }
 
   create() {
-    const gridOriginX = (GAME_W - GRID_TOTAL) / 2;
-    const gridOriginY = 260;
+    // Two-column landscape layout
+    const leftX = GAME_W * 0.3;
+    const rightX = GAME_W * 0.7;
+    const gridOriginX = leftX - GRID_TOTAL / 2;
+    const gridOriginY = GAME_H * 0.5 - GRID_TOTAL / 2 + 10;
 
     // HUD — stage number
-    this.add.text(GAME_W / 2, 40, `STAGE ${this.stage}`, {
+    this.add.text(GAME_W / 2, 30, `STAGE ${this.stage}`, {
       fontFamily: FONT_TITLE,
       fontSize: '16px',
       color: '#4eff7a',
     }).setOrigin(0.5);
 
-    // Pixel count display
-    this.pixelCountText = this.add.text(GAME_W / 2, 200, '', {
+    // Pixel count display (left column)
+    this.pixelCountText = this.add.text(leftX, gridOriginY - 50, '', {
       fontFamily: FONT_MAIN,
       fontSize: '18px',
       color: COLORS.TEXT,
     }).setOrigin(0.5);
     this.updatePixelCountText();
 
-    // Instructions
-    this.add.text(GAME_W / 2, 228, 'タップでピクセルを配置', {
+    // Instructions (left column)
+    this.add.text(leftX, gridOriginY - 25, 'タップでピクセルを配置', {
       fontFamily: FONT_MAIN,
       fontSize: '14px',
       color: COLORS.TEXT_DIM,
     }).setOrigin(0.5);
 
-    // Grid cells
+    // Grid cells (left column)
     this.cells = [];
     this.cellBgs = [];
     for (let row = 0; row < 3; row++) {
@@ -69,22 +72,28 @@ export class EditScene extends Phaser.Scene {
       }
     }
 
-    // Gimmick preview
+    // Gimmick preview (right column)
     const unlocked = getUnlockedGimmicks(this.stage);
     const uniqueTypes = [...new Set(unlocked)];
 
-    this.add.text(GAME_W / 2, 420, '出現ギミック', {
+    this.add.text(rightX, 80, '出現ギミック', {
       fontFamily: FONT_MAIN,
       fontSize: '14px',
       color: COLORS.TEXT_DIM,
     }).setOrigin(0.5);
 
-    const previewStartX = GAME_W / 2 - (uniqueTypes.length * 56) / 2 + 28;
+    const maxPerRow = 4;
+    const iconSpacing = 56;
+    const rows = Math.ceil(uniqueTypes.length / maxPerRow);
     uniqueTypes.forEach((type, i) => {
       const cfg = GIMMICK_CONFIG[type];
       if (!cfg) return;
-      const px = previewStartX + i * 56;
-      const py = 460;
+      const row = Math.floor(i / maxPerRow);
+      const col = i % maxPerRow;
+      const colCount = Math.min(uniqueTypes.length - row * maxPerRow, maxPerRow);
+      const rowStartX = rightX - (colCount * iconSpacing) / 2 + iconSpacing / 2;
+      const px = rowStartX + col * iconSpacing;
+      const py = 120 + row * 50;
       const colorStr = '#' + cfg.color.toString(16).padStart(6, '0');
 
       this.add.text(px, py - 10, cfg.icon, {
@@ -100,10 +109,11 @@ export class EditScene extends Phaser.Scene {
       }).setOrigin(0.5);
     });
 
-    // Depart button
-    this.departBg = this.add.rectangle(GAME_W / 2, 580, 200, 56, COLORS.PLAYER, 0.15)
+    // Depart button (right column)
+    const btnY = GAME_H * 0.75;
+    this.departBg = this.add.rectangle(rightX, btnY, 200, 56, COLORS.PLAYER, 0.15)
       .setStrokeStyle(2, COLORS.PLAYER);
-    this.departText = this.add.text(GAME_W / 2, 580, '出発', {
+    this.departText = this.add.text(rightX, btnY, '出発', {
       fontFamily: FONT_MAIN,
       fontSize: '22px',
       color: '#4eff7a',
