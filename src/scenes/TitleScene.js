@@ -26,29 +26,29 @@ export class TitleScene extends Phaser.Scene {
     }
 
     // Title — two lines
-    this.add.text(GAME_W / 2, 260, '1 PIXEL', {
+    this.add.text(GAME_W / 2, 110, '1 PIXEL', {
       fontFamily: FONT_TITLE,
       fontSize: '32px',
       color: '#4eff7a',
     }).setOrigin(0.5);
 
-    this.add.text(GAME_W / 2, 310, 'QUEST', {
+    this.add.text(GAME_W / 2, 160, 'QUEST', {
       fontFamily: FONT_TITLE,
       fontSize: '32px',
       color: '#4eff7a',
     }).setOrigin(0.5);
 
     // Subtitle
-    this.add.text(GAME_W / 2, 370, '形が、運命。', {
+    this.add.text(GAME_W / 2, 215, '形が、運命。', {
       fontFamily: FONT_MAIN,
       fontSize: '18px',
       color: COLORS.TEXT_DIM,
     }).setOrigin(0.5);
 
     // START button
-    const btnBg = this.add.rectangle(GAME_W / 2, 520, 200, 56, COLORS.PLAYER, 0.15)
+    const btnBg = this.add.rectangle(GAME_W / 2, 340, 200, 56, COLORS.PLAYER, 0.15)
       .setStrokeStyle(2, COLORS.PLAYER);
-    const btnText = this.add.text(GAME_W / 2, 520, 'START', {
+    const btnText = this.add.text(GAME_W / 2, 340, 'START', {
       fontFamily: FONT_TITLE,
       fontSize: '18px',
       color: '#4eff7a',

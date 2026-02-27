@@ -17,8 +17,8 @@ export const COLORS = {
 };
 
 // ── Dimensions ──
-export const GAME_W = 480;
-export const GAME_H = 800;
+export const GAME_W = 800;
+export const GAME_H = 480;
 export const CELL_SIZE = 32;
 export const CELL_GAP = 4;
 export const GRID_SIZE = 3;

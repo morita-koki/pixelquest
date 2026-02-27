@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { FONT_MAIN, FONT_TITLE, COLORS } from '../constants.js';
+import { GAME_W, GAME_H, FONT_MAIN, FONT_TITLE, COLORS } from '../constants.js';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -7,7 +7,7 @@ export class BootScene extends Phaser.Scene {
   }
 
   create() {
-    const loadingText = this.add.text(240, 400, 'Loading...', {
+    const loadingText = this.add.text(GAME_W / 2, GAME_H / 2, 'Loading...', {
       fontFamily: 'sans-serif',
       fontSize: '20px',
       color: COLORS.TEXT,

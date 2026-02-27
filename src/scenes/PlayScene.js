@@ -72,7 +72,7 @@ export class PlayScene extends Phaser.Scene {
       container.add(line);
 
       // Icon
-      const icon = this.add.text(0, GAME_H * 0.5 - 80, cfg.icon, {
+      const icon = this.add.text(0, GAME_H * 0.5 - 60, cfg.icon, {
         fontFamily: FONT_MAIN,
         fontSize: '28px',
         color: colorStr,
@@ -80,7 +80,7 @@ export class PlayScene extends Phaser.Scene {
       container.add(icon);
 
       // Label
-      const label = this.add.text(0, GAME_H * 0.5 + 80, cfg.label, {
+      const label = this.add.text(0, GAME_H * 0.5 + 60, cfg.label, {
         fontFamily: FONT_MAIN,
         fontSize: '12px',
         color: colorStr,
